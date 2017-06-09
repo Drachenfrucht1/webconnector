@@ -1,0 +1,105 @@
+<!doctype html>
+<html>
+<head>
+	<meta charset="utf-8"/>
+	<title>Accounts - Webinterface</title>
+	<link rel="stylesheet" href="stylesheet.css"/>
+  <script type="text/javascript" src="http://code.jquery.com/jquery-3.2.1.min.js"></script>
+</head>
+<body>
+	<nav>
+		<ul>
+			<li><a href="index.html">Home</a></li>
+			<li><a href="console.html">Console</a></li>
+			<li><a href="players.html">Players</a></li>
+			<li><a href="#">%account_name%</a></li>
+		</ul>
+	</nav>
+
+	<div>
+		<h1>User</h1>
+    <section id="cmd"></section>
+		<input type="button" class="small" value="Add User" onclick="openAdder()" />
+		<div class="hidden" id="editor">
+			<h2 id="heading"></h2><br />
+      Username: <input type="text" id="name_e" placeholder="Username" /><br />
+      Password: <input type="text" id="pw_e" placeholder="Password" /><br />
+      <input type="button" class="small" value="Save" onclick="saveEdits()" />
+      <input type="button" class="small" value="Close" onclick="closeEditor()" />
+    </div><br />
+		<div class="hidden" id="adder">
+			<h2 id="heading"></h2><br />
+      Username: <input type="text" id="name_a" placeholder="Username" /><br />
+      Password: <input type="text" id="pw_a" placeholder="Password" /><br />
+      <input type="button" class="small" value="Add" onclick="addUser()" />
+      <input type="button" class="small" value="Close" onclick="closeEditor()" />
+    </div><br />
+		<section id="accounts">
+			<table>
+	      <tbody>
+	        %account_list%
+	      </tbody>
+	    </table>
+		</section>
+	</div>
+
+  <script>
+    var user;
+		var open = false;
+
+    function openEditor(name, mode) {
+			if(open == false) {
+	      user = name;
+				if(user == "root") {
+					$("#name").val("root");
+				}
+	      $("#heading").text("Edit " + user);
+	      $("#editor").slideDown("slow");
+				$("#accounts").css("padding-top", "275px");
+				open = true;
+			}
+    }
+
+		function openAdder() {
+			if(open == false) {
+				$("#heading").text("Add new user");
+				$("#adder").slideDown("slow");
+				$("#accounts").css("padding-top", "275px");
+				open = true;
+			}
+		}
+
+		function addUser() {
+			sendCommand("add_name:" + $("#name_a").val() + "_pw:" + $("#pw_a").val());
+			closeEditor();
+			alert("You succesfully added a new user!");
+		}
+
+    function saveEdits() {
+			if(user == "roor") {
+				sendCommand("save_aname:root_name:root_pw:" + $("#pw_e").val());
+			} else {
+      	sendCommand("save_aname:" + user +"_name:" + $("#name_e").val() + "_pw:" + $("#pw_e").val());
+			}
+      user = "";
+			closeEditor();
+			alert("You succesfully saved the configuration!");
+    }
+
+    function closeEditor() {
+      $("#editor").slideUp("slow");
+			$("#adder").slideUp("slow");
+			//set list back after 1 second
+			setTimeout(function() {
+				$("#accounts").css("padding-top", "20px");
+			}, 500)
+			open = false;
+    }
+
+    function sendCommand(command) {
+      $("#cmd").load("acc_cmd?" + command);
+			location.reload();
+    }
+  </script>
+</body>
+</html>

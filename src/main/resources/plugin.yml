@@ -1,0 +1,5 @@
+main: com.drachenfrucht1.spielt.webconnector.Main
+name: WebConnector
+author: Drachenfrucht1
+version: 1.0
+description: Connector for Webinterface

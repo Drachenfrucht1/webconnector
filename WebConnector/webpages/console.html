@@ -1,0 +1,53 @@
+<!doctype html>
+<html>
+<head>
+    	<meta charset="utf-8" />
+      <link rel="stylesheet" href="stylesheet.css" />
+      <script type="text/javascript" src="http://code.jquery.com/jquery-3.2.1.min.js"></script>
+</head>
+<body onload="load()">
+  <nav>
+		<ul>
+      <li><a href="index.html">Home</a></li>
+			<li><a href="#">Console</a></li>
+			<li><a href="players.html">Players</a></li>
+			<li><a href="accounts.html">%account_name%</a></li>
+		</ul>
+	</nav>
+
+  <div class="content">
+    <h1>Konsole</h1>
+    <input type="image" id="stopServer" src="http://wordpressjava.azurewebsites.net/wp-content/uploads/2017/05/off.png" onclick="stopServer()" /><br />
+    <section id="console_send"></section>
+    <section id="console_view"></section>
+    <form>
+      <input type="text" placeholder=">" id="command" />
+      <input type="button" value="Send" id="send" />
+    </form>
+  </div>
+
+  <script>
+    function updateConsole() {
+      $("#console_view").load("console_view.html");
+    }
+
+    function stopServer() {
+      $("#console_send").load("console_send?stop");
+    }
+
+    $(document).ready(function() {
+      updateConsole();
+      setInterval(function() {
+        $("#console_view").load("console_view.html");
+        var myDiv = document.getElementById("console_view");
+        myDiv.scrollTop = myDiv.scrollHeight;
+      }, 1000);
+    })
+    $("#send").click(function() {
+      var value = $("#command").val();
+      $("#console_send").load("console_send?" + value);
+      $("#command").val("");
+    })
+  </script>
+</body>
+</html>
