@@ -1,6 +1,8 @@
-package com.drachenfrucht1.spielt.webconnector;
+package com.drachenfrucht1.spielt.webconnector.misc;
 
+import com.drachenfrucht1.spielt.webconnector.Main;
 import com.sun.net.httpserver.BasicAuthenticator;
+import lombok.Getter;
 import org.bukkit.configuration.file.YamlConfiguration;
 
 import java.io.File;
@@ -9,15 +11,19 @@ import java.util.List;
 /**
  * Created by Drachenfrucht1 on 10.05.2017.
  */
-class LoginManager {
+public class LoginManager {
 
   private BasicAuthenticator basicAuthenticator;
 
-  private File f = new File(Main.instance.getDataFolder() + "//users.yml");
-  private YamlConfiguration cfg;
+  private File f;
+  private @Getter YamlConfiguration cfg;
 
-  LoginManager() {
+  private Main main;
+
+  public LoginManager(Main m) {
+    main = m;
     cfg = YamlConfiguration.loadConfiguration(f);
+    File f = new File(main.getDataFolder() + "//users.yml");
 
     basicAuthenticator = new BasicAuthenticator("/") {
       @Override
@@ -39,7 +45,7 @@ class LoginManager {
     return false;
   }
 
-  private boolean userExists(String user) {
+  public boolean userExists(String user) {
     List<String> users = cfg.getStringList("users");
 
     for(String s : users) {
@@ -51,7 +57,7 @@ class LoginManager {
     return false;
   }
 
-  void addUser(String username, String password) {
+  public void addUser(String username, String password) {
     List<String> users = cfg.getStringList("users");
 
     if(!userExists(username)) {
@@ -61,7 +67,7 @@ class LoginManager {
     }
   }
 
-  void changeUser(String old_name, String name, String password) {
+  public void changeUser(String old_name, String name, String password) {
     List<String> users = cfg.getStringList("users");
 
     if(userExists(old_name)) {
@@ -79,7 +85,7 @@ class LoginManager {
     }
   }
 
-  void deleteUser(String name) {
+  public void deleteUser(String name) {
     List<String> users = cfg.getStringList("users");
 
     if(userExists(name)) {
@@ -94,7 +100,7 @@ class LoginManager {
     }
   }
 
-  void saveConfig() {
+  public void saveConfig() {
     try {
       cfg.save(f);
     } catch (Exception e) {

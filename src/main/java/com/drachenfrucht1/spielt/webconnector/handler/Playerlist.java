@@ -1,5 +1,7 @@
-package com.drachenfrucht1.spielt.webconnector;
+package com.drachenfrucht1.spielt.webconnector.handler;
 
+import com.drachenfrucht1.spielt.webconnector.Main;
+import com.drachenfrucht1.spielt.webconnector.misc.FileUtils;
 import com.sun.net.httpserver.HttpExchange;
 import com.sun.net.httpserver.HttpHandler;
 import org.bukkit.Bukkit;
@@ -13,24 +15,10 @@ import java.io.OutputStream;
  */
 public class Playerlist implements HttpHandler{
 
-  static String getPlayerList() {
-    String response = "<p>";
+  Main main;
 
-    for(Player p : Bukkit.getOnlinePlayers()) {
-      response = response +
-              "<tr><td><img src=\"https://minotar.net/avatar/%playername%/16\"></td><td>" +
-              "<a href =\"/player_info?%playername%\">%playername% (UUID: %playeruuid%)</a> " +
-              "<input type=\"button\" class=\"small\" value=\"Kick\" onclick=\"sendCommand('kick %playername%')\" />" +
-              "<input type=\"button\" class=\"small\" value=\"Ban\" onclick=\"sendCommand('ban %playername% Du wurdest von einem Admin gebannt')\" /></p></td></tr>";
-      response = response
-              .replace("%playername%", p.getName())
-              .replace("%playeruuid%", p.getUniqueId().toString());
-    }
-    if(response.trim().equalsIgnoreCase("<p>")) {
-      response = "<p>Es sind keine Spieler online!</p>";
-    }
-
-    return response;
+  public Playerlist(Main m) {
+    main = m;
   }
 
   public void handle(HttpExchange httpExchange) throws IOException {
@@ -38,7 +26,7 @@ public class Playerlist implements HttpHandler{
 
     if(Bukkit.getPlayer(playername).isOnline()) {
       Player p =Bukkit.getPlayer(playername);
-      String response = FileUtils.getFileContents("playerinfo.html", Main.instance);
+      String response = FileUtils.getFileContents("playerinfo.html", main);
       response = response
               .replace("%name%", p.getName())
               .replace("%uuid%", p.getUniqueId().toString())

@@ -3,3 +3,7 @@ name: WebConnector
 author: Drachenfrucht1
 version: 1.0
 description: Connector for Webinterface
+commands:
+  user:
+    usage: "Usage: /user [add, delete, list] [name] [password] [password]"
+    description: Usermanagement for the webinterface

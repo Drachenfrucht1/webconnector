@@ -1,5 +1,13 @@
 package com.drachenfrucht1.spielt.webconnector;
 
+import com.drachenfrucht1.spielt.webconnector.cmd.CmdUser;
+import com.drachenfrucht1.spielt.webconnector.cmd.TcUser;
+import com.drachenfrucht1.spielt.webconnector.listener.JoinListener;
+import com.drachenfrucht1.spielt.webconnector.misc.LoginManager;
+import lombok.Getter;
+import lombok.Setter;
+import org.bukkit.Bukkit;
+import org.bukkit.ChatColor;
 import org.bukkit.plugin.java.JavaPlugin;
 
 /**
@@ -7,21 +15,26 @@ import org.bukkit.plugin.java.JavaPlugin;
  */
 public class Main extends JavaPlugin {
 
-  private WebServerManager webServerManager;
-  private static LoginManager loginManager;
+  private @Getter WebServerManager webServerManager;
+  private @Getter LoginManager loginManager;
+  private @Getter @Setter int maxPlayers = 0;
 
-  static Main instance;
+  //constants
+  private final static @Getter String PRAEFIX = ChatColor.AQUA + "[" + ChatColor.GOLD + "Webinterface" + ChatColor.AQUA + "] " + ChatColor.GRAY;
 
   @Override
   public void onEnable() {
     try {
-      instance = this;
+      loadConfig();
 
-      webServerManager = new WebServerManager(40);
-      loginManager = new LoginManager();
+      webServerManager = new WebServerManager(getConfig().getInt("port"));
+      loginManager = new LoginManager(this);
       new WebFileManager(this);
       webServerManager.getServer().setExecutor(null);
       webServerManager.start();
+
+      registerEvents();
+      registerCommands();
     } catch (Exception e) {
       e.printStackTrace();
     }
@@ -35,16 +48,17 @@ public class Main extends JavaPlugin {
     System.out.println("[WebConnector] Plugin deactivated!");
   }
 
-  /*private void loadConfig() {
-    getConfig().options().copyDefaults(true);
-    saveConfig();
-  }*/
-
-  public WebServerManager getWebServerManager() {
-    return webServerManager;
+  private void registerCommands() {
+    this.getCommand("user").setExecutor(new CmdUser(this));
+    this.getCommand("user").setTabCompleter(new TcUser());
   }
 
-  public static LoginManager getLoginManager() {
-    return loginManager;
+  private void registerEvents() {
+    Bukkit.getPluginManager().registerEvents(new JoinListener(this), this);
+  }
+
+  private void loadConfig() {
+    getConfig().options().copyDefaults(true);
+    saveConfig();
   }
 }

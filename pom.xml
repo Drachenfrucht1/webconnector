@@ -6,7 +6,7 @@
 
     <groupId>com.drachenfrucht1.spielt</groupId>
     <artifactId>webcon</artifactId>
-    <version>1.0</version>
+    <version>1.1-SNAPSHOT</version>
 
     <repositories>
         <repository>
@@ -14,12 +14,18 @@
             <url>https://hub.spigotmc.org/nexus/content/repositories/snapshots/</url>
         </repository>
     </repositories>
+
     <dependencies>
         <dependency>
             <groupId>org.spigotmc</groupId>
             <artifactId>spigot-api</artifactId>
             <version>1.11.2-R0.1-SNAPSHOT</version>
-            <scope>provided</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <version>1.16.16</version>
         </dependency>
     </dependencies>
 </project>

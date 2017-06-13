@@ -1,5 +1,7 @@
-package com.drachenfrucht1.spielt.webconnector;
+package com.drachenfrucht1.spielt.webconnector.handler;
 
+import com.drachenfrucht1.spielt.webconnector.Main;
+import com.drachenfrucht1.spielt.webconnector.misc.FileUtils;
 import com.sun.net.httpserver.HttpExchange;
 import com.sun.net.httpserver.HttpHandler;
 import org.bukkit.Bukkit;
@@ -11,8 +13,10 @@ import java.io.IOException;
  */
 public class Console implements HttpHandler{
 
-  static String getLog() {
-    return FileUtils.getLogContents();
+  private Main main;
+
+  public Console(Main m) {
+    main = m;
   }
 
   private static void sendCommand(final String command, Main main) {
@@ -24,6 +28,6 @@ public class Console implements HttpHandler{
   }
 
   public void handle(HttpExchange httpExchange) throws IOException {
-    sendCommand(httpExchange.getRequestURI().getQuery().toString(), Main.instance);
+    sendCommand(httpExchange.getRequestURI().getQuery().toString(), main);
   }
 }
