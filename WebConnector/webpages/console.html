@@ -1,9 +1,10 @@
 <!doctype html>
 <html>
 <head>
-    	<meta charset="utf-8" />
-      <link rel="stylesheet" href="stylesheet.css" />
-      <script type="text/javascript" src="http://code.jquery.com/jquery-3.2.1.min.js"></script>
+  <meta charset="utf-8" />
+  <title>Console - Webinterface</title>
+  <link rel="stylesheet" href="stylesheet.css" />
+  <script type="text/javascript" src="http://code.jquery.com/jquery-3.2.1.min.js"></script>
 </head>
 <body onload="load()">
   <nav>
@@ -27,6 +28,8 @@
   </div>
 
   <script>
+    var myDiv = document.getElementById("console_view");
+
     function updateConsole() {
       $("#console_view").load("console_view.html");
     }
@@ -37,9 +40,9 @@
 
     $(document).ready(function() {
       updateConsole();
+      myDiv.scrollTop = myDiv.scrollHeight;
       setInterval(function() {
-        $("#console_view").load("console_view.html");
-        var myDiv = document.getElementById("console_view");
+        updateConsole();
         myDiv.scrollTop = myDiv.scrollHeight;
       }, 1000);
     })
