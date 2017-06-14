@@ -22,8 +22,8 @@ public class LoginManager {
 
   public LoginManager(Main m) {
     main = m;
+    f = new File(main.getDataFolder() + "//users.yml");
     cfg = YamlConfiguration.loadConfiguration(f);
-    File f = new File(main.getDataFolder() + "//users.yml");
 
     basicAuthenticator = new BasicAuthenticator("/") {
       @Override
@@ -36,8 +36,8 @@ public class LoginManager {
   private boolean userExists(String user, String password) {
     List<String> users = cfg.getStringList("users");
 
-    for(String s : users) {
-      if(s.split("---:::---")[0].equals(user) && s.split("---:::---")[1].equals(password)) {
+    for (String s : users) {
+      if (s.split("---:::---")[0].equals(user) && s.split("---:::---")[1].equals(password)) {
         return true;
       }
     }
@@ -48,8 +48,8 @@ public class LoginManager {
   public boolean userExists(String user) {
     List<String> users = cfg.getStringList("users");
 
-    for(String s : users) {
-      if(s.split("---:::---")[0].equals(user)) {
+    for (String s : users) {
+      if (s.split("---:::---")[0].equals(user)) {
         return true;
       }
     }
@@ -60,7 +60,7 @@ public class LoginManager {
   public void addUser(String username, String password) {
     List<String> users = cfg.getStringList("users");
 
-    if(!userExists(username)) {
+    if (!userExists(username)) {
       users.add(username + "---:::---" + password);
       cfg.set("users", users);
       saveConfig();
@@ -70,9 +70,9 @@ public class LoginManager {
   public void changeUser(String old_name, String name, String password) {
     List<String> users = cfg.getStringList("users");
 
-    if(userExists(old_name)) {
-      for(String s : users) {
-        if(s.split("---:::---")[0].equals(old_name)) {
+    if (userExists(old_name)) {
+      for (String s : users) {
+        if (s.split("---:::---")[0].equals(old_name)) {
           users.remove(s);
           users.add(name + "---:::---" + password);
           cfg.set("users", users);
@@ -88,9 +88,9 @@ public class LoginManager {
   public void deleteUser(String name) {
     List<String> users = cfg.getStringList("users");
 
-    if(userExists(name)) {
-      for(String s : users) {
-        if(s.split("---:::---")[0].equals(name)) {
+    if (userExists(name)) {
+      for (String s : users) {
+        if (s.split("---:::---")[0].equals(name)) {
           users.remove(s);
           cfg.set("users", users);
           saveConfig();

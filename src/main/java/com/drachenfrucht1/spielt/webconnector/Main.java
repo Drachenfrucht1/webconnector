@@ -15,12 +15,11 @@ import org.bukkit.plugin.java.JavaPlugin;
  */
 public class Main extends JavaPlugin {
 
+  //constants
+  private final static @Getter String PRAEFIX = ChatColor.AQUA + "[" + ChatColor.GOLD + "Webinterface" + ChatColor.AQUA + "] " + ChatColor.GRAY;
   private @Getter WebServerManager webServerManager;
   private @Getter LoginManager loginManager;
   private @Getter @Setter int maxPlayers = 0;
-
-  //constants
-  private final static @Getter String PRAEFIX = ChatColor.AQUA + "[" + ChatColor.GOLD + "Webinterface" + ChatColor.AQUA + "] " + ChatColor.GRAY;
 
   @Override
   public void onEnable() {

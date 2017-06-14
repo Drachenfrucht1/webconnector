@@ -6,7 +6,6 @@ import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -24,14 +23,14 @@ public class CmdUser implements CommandExecutor {
 
   public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
 
-    if(cmd.getName().equalsIgnoreCase("user")) {
+    if (cmd.getName().equalsIgnoreCase("user")) {
 
-      if(args[0].equalsIgnoreCase("add")) {
-        if(sender.hasPermission("web.user.add")) {
+      if (args[0].equalsIgnoreCase("add")) {
+        if (sender.hasPermission("web.user.add")) {
           if (args.length != 4) return false;
 
-          if(!main.getLoginManager().userExists(args[1])) {
-            if(args[2].equals(args[3])) {
+          if (!main.getLoginManager().userExists(args[1])) {
+            if (args[2].equals(args[3])) {
               main.getLoginManager().addUser(args[1], args[2]);
               sender.sendMessage(Main.getPRAEFIX() + "You added the user " + args[1] + " to the webinterface!");
               return true;
@@ -48,11 +47,11 @@ public class CmdUser implements CommandExecutor {
           return true;
         }
 
-      } else if(args[0].equalsIgnoreCase("delete")) {
-        if(sender.hasPermission("web.user.delete")) {
+      } else if (args[0].equalsIgnoreCase("delete")) {
+        if (sender.hasPermission("web.user.delete")) {
           if (args.length != 2) return false;
 
-          if(main.getLoginManager().userExists(args[1])) {
+          if (main.getLoginManager().userExists(args[1])) {
             main.getLoginManager().deleteUser(args[1]);
             sender.sendMessage(Main.getPRAEFIX() + "You removed user " + args[1] + " from the webinterface!");
             return true;
@@ -65,13 +64,13 @@ public class CmdUser implements CommandExecutor {
           return true;
         }
 
-      } else if(args[0].equalsIgnoreCase("list")) {
-        if(sender.hasPermission("web.user.list")) {
+      } else if (args[0].equalsIgnoreCase("list")) {
+        if (sender.hasPermission("web.user.list")) {
           if (args.length != 1) return false;
 
           String out = Main.getPRAEFIX() + "Webinterface users: ";
           List<String> users = main.getLoginManager().getCfg().getStringList("users");
-          for(int i = 0; i<users.size(); i++) {
+          for (int i = 0; i < users.size(); i++) {
             out = out + users.get(i).split("---:::---")[0];
           }
           sender.sendMessage(out);

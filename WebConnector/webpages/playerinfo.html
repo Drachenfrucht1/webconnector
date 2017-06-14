@@ -3,10 +3,60 @@
 <head>
   <meta charset="utf-8" />
   <title>Playerinfo - Webinterface</title>
-  <link rel="stylesheet" href="stylesheet.css" />
+  <link rel="stylesheet" href="CSS/stylesheet.css" />
   <script type="text/javascript" src="http://code.jquery.com/jquery-3.2.1.min.js"></script>
+
+  <script>
+    var health;
+    var food;
+    var x;
+    var y;
+    var z;
+    var world;
+    var name;
+
+    $(document).ready(function() {
+      health = $("#health").val();
+      food = $("#food").val();
+      x = $("#x").val();
+      y = $("#y").val();
+      z = $("#z").val();
+      world = $("#world").val();
+      name = document.getElementById("name").innerHTML;
+    });
+
+    function save() {
+      var s = "change_name=" + name + "_";
+      if(health != $("#health").val()) {
+        s = s + "health=" + $("#health").val() + "_";
+        health = $("#health").val();
+      }
+      if(food != $("#food").val()) {
+        s = s + "food=" + $("#food").val() + "_";
+        food = $("#food").val();
+      }
+      if(x != $("#x").val()) {
+        s = s + "x=" + $("#x").val() + "_";
+        x = $("#x").val();
+      }
+      if(y != $("#y").val()) {
+        s = s + "y=" + $("#y").val() + "_";
+        y = $("#y").val();
+      }
+      if(z != $("#z").val()) {
+        s = s + "z=" + $("#z").val() + "_";
+        z = $("#z").val();
+      }
+      if(world != $("#world").val()) {
+        s = s + "world=" + $("#world").val() + "_";
+        world = $("#world").val();
+      }
+
+      $("#load").load("/playerChange?" + s);
+    }
+  </script>
 </head>
-<body onload="load()">
+<body>
   <nav>
 		<ul>
 			<li><a href="index.html">Home</a></li>
@@ -24,7 +74,7 @@
           <tbody>
             <tr>
               <td>Name:</td>
-              <td>%name%</td>
+              <td id="name">%name%</td>
             </tr>
             <tr>
               <td>UUID:</td>
@@ -32,23 +82,40 @@
             </tr>
             <tr>
               <td>Health:</td>
-              <td>%health%</td>
+              <td>
+                <input type="text" value="%health%" id="health" />
+              </td>
             </tr>
             <tr>
               <td>Food:</td>
-              <td>%food%</td>
+              <td>
+                <input type="text" value="%food%" id="food" />
+              </td>
             </tr>
             <tr>
               <td>Gamemode:</td>
               <td>%gamemode%</td>
             </tr>
             <tr>
+              <td>Position:</td>
+              <td>
+                <input type="text" value="%x%" id="x" class="short" />,&nbsp;
+                <input type="text" value="%y%" id="y" class="short"/>,&nbsp;
+                <input type="text" value="%z%" id="z" class="short"/>
+              </td>
+            </tr>
+            <tr>
               <td>World:</td>
-              <td>%world%</td>
+              <td>
+                <input type="text" value="%world%" id="world"/>
+              </td>
             </tr>
           </tbody>
         </table>
+        <br />
+        <input type="button" class="small" onclick="save();" value="Change"/>
       </section>
+      <section id="load"></section>
     </p>
   </div>
 </body>

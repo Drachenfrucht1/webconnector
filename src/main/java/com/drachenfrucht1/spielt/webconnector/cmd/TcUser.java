@@ -16,9 +16,9 @@ public class TcUser implements TabCompleter {
 
   public List<String> onTabComplete(CommandSender sender, Command cmd, String label, String[] args) {
 
-    if(cmd.getName().equalsIgnoreCase("user")) {
-      if(sender.hasPermission("web.user.tc")) {
-        if(args.length == 0) {
+    if (cmd.getName().equalsIgnoreCase("user")) {
+      if (sender.hasPermission("web.user.tc")) {
+        if (args.length == 0) {
           List<String> tc = new ArrayList<String>();
           tc.add("add");
           tc.add("delete");

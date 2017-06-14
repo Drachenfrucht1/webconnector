@@ -22,7 +22,7 @@ public class FileUtils {
 
       String line = bufferedReader.readLine();
 
-      while(line != null) {
+      while (line != null) {
         stringBuilder.append(line);
         stringBuilder.append(System.lineSeparator());
         line = bufferedReader.readLine();
@@ -41,7 +41,7 @@ public class FileUtils {
 
       String line = bufferedReader.readLine();
 
-      while(line != null) {
+      while (line != null) {
         stringBuilder.append(line);
         stringBuilder.append("<br>");
         line = bufferedReader.readLine();
@@ -58,7 +58,7 @@ public class FileUtils {
   public static String getPlayerList() {
     String response = "<p>";
 
-    for(Player p : Bukkit.getOnlinePlayers()) {
+    for (Player p : Bukkit.getOnlinePlayers()) {
       response = response +
               "<tr><td><img src=\"https://minotar.net/avatar/%playername%/16\"></td><td>" +
               "<a href =\"/player_info?%playername%\">%playername% (UUID: %playeruuid%)</a> " +
@@ -68,7 +68,7 @@ public class FileUtils {
               .replace("%playername%", p.getName())
               .replace("%playeruuid%", p.getUniqueId().toString());
     }
-    if(response.trim().equalsIgnoreCase("<p>")) {
+    if (response.trim().equalsIgnoreCase("<p>")) {
       response = "<p>Es sind keine Spieler online!</p>";
     }
 
@@ -80,8 +80,8 @@ public class FileUtils {
     List<String> users = YamlConfiguration.loadConfiguration(f).getStringList("users");
 
     String str = "";
-    for(String s : users) {
-      if(s.split("---:::---")[0].equals("root")) {
+    for (String s : users) {
+      if (s.split("---:::---")[0].equals("root")) {
         str = str + "<tr><td>" +
                 s.split("---:::---")[0] +
                 "</td><td><input type=\"button\" class=\"small\" value=\"Edit\" onclick=\"openEditor('%acc%')\" />" +

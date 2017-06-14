@@ -126,6 +126,10 @@ input[type=button].small {
 
 */
 
+input[type=text].short {
+  width: 200px;
+}
+
 .hidden {
   display: none;
   background-color: rgba(0, 0, 0, 0);

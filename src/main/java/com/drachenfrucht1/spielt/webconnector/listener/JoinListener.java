@@ -23,7 +23,7 @@ public class JoinListener implements Listener {
 
   @EventHandler
   public void onJoin(PlayerJoinEvent e) {
-    if(main.getMaxPlayers() < Bukkit.getOnlinePlayers().size()) {
+    if (main.getMaxPlayers() < Bukkit.getOnlinePlayers().size()) {
       main.setMaxPlayers(Bukkit.getOnlinePlayers().size());
     }
   }
