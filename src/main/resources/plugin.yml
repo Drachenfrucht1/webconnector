@@ -7,3 +7,6 @@ commands:
   user:
     usage: "Usage: /user [add, delete, list] [name] [password] [password]"
     description: Usermanagement for the webinterface
+  webconnector:
+    Usage: "Usage: /webconnector"
+    aliases: wc

@@ -10,4 +10,14 @@ You can access the webinterface under YourIp:8000 if you use the standart option
 
 The standart user is root with the password root.<br>
 
+Permission:
+<ul>
+    <li>web.user.* - Usermanagement via Minecraft
+    <ul>
+        <li>web.user.add - Add a Webinterface-User</li>
+        <li>web.user.delete - Delete a Webinterface-User</li>
+    </ul></li>
+    <li>web.webconnector - Help Command</li>
+</ul>
+
 Have fun using my plugin.

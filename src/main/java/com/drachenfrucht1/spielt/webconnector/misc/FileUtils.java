@@ -63,7 +63,7 @@ public class FileUtils {
               "<tr><td><img src=\"https://minotar.net/avatar/%playername%/16\"></td><td>" +
               "<a href =\"/player_info?%playername%\">%playername% (UUID: %playeruuid%)</a> " +
               "<input type=\"button\" class=\"small\" value=\"Kick\" onclick=\"sendCommand('kick %playername%')\" />" +
-              "<input type=\"button\" class=\"small\" value=\"Ban\" onclick=\"sendCommand('ban %playername% Du wurdest von einem Admin gebannt')\" /></p></td></tr>";
+              "<i class=\"fa fa-ban fa-2x\" onclick=\"sendCommand('ban %playername% Du wurdest von einem Admin gebannt')\" /></i></p></td></tr>";
       response = response
               .replace("%playername%", p.getName())
               .replace("%playeruuid%", p.getUniqueId().toString());
