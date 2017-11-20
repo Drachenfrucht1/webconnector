@@ -15,6 +15,12 @@ import java.util.List;
  */
 public class FileUtils {
 
+  /**
+   *
+   * @param filename file
+   * @param main main-class
+   * @return filecontent
+   */
   public static String getFileContents(String filename, Main main) {
     try {
       BufferedReader bufferedReader = new BufferedReader(new FileReader(main.getDataFolder() + "//webpages//" + filename));

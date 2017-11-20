@@ -11,7 +11,7 @@
 }
 
 body, html {
-  background-image: url("http://wordpressjava.azurewebsites.net/wp-content/uploads/2017/06/small.png");
+  background-image: url("http://46.228.192.79/files/bg_2.png");
   background-attachment: fixed;
   background-repeat: no-repeat;
   background-size: 100% 100%;
@@ -21,7 +21,7 @@ body, html {
 
 @media only screen and (max-height: 1080px) {
   body, html {
-    background-image: url("http://wordpressjava.azurewebsites.net/wp-content/uploads/2017/06/background.png");
+    background-image: url("http://46.228.192.79/files/bg.png");
     background-attachment: fixed;
     background-repeat: no-repeat;
     height: 100%;
